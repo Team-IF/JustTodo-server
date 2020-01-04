@@ -1,6 +1,7 @@
+import json
 from secrets import token_urlsafe
 
-from flask import Flask
+from flask import Flask, Response
 
 app = Flask(__name__)
 
@@ -16,7 +17,8 @@ class Item:
     project: str
     target: str
 
-    def __init__(self, title: str, content: str, author: str, project: str = None, target: str = None):
+    def __init__(self, title: str, content: str, author: str, project: str = None, target: str = None,
+                 private: bool = False):
         self.id = token_urlsafe(10)
         self.title = title
         self.content = content
@@ -25,11 +27,15 @@ class Item:
         self.target = target
         self.completed = False
         self.removed = False
+        self.private = private
 
 
 @app.route('/', methods=['GET'])
 def todolist():
-    pass
+    with open('todo.json', 'r') as f:
+        res = Response(json.load(f))
+        res.headers['Content-Type'] = 'application/json; charset=utf-8'
+    return res
 
 
 @app.route('/', methods=['POST'])
