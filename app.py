@@ -1,7 +1,6 @@
 import json
-from secrets import token_urlsafe
-
 from flask import Flask, jsonify, request
+from secrets import token_urlsafe
 
 app = Flask(__name__)
 
@@ -41,7 +40,6 @@ class Item:
             'completed': self.completed,
             'removed': self.removed,
             'private': self.private}
-
 
 @app.route('/', methods=['GET'])
 def todolist():
