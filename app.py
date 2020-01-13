@@ -1,6 +1,7 @@
 import sqlite3
-from flask import Flask, jsonify, request
 from secrets import token_urlsafe
+
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -12,7 +13,7 @@ def dict_factory(cursor, row):
     return d
 
 
-conn = sqlite3.connect("todo.db", isolation_level=None)
+conn = sqlite3.connect("todo.db", isolation_level=None, check_same_thread=False)
 conn.row_factory = dict_factory
 cur = conn.cursor()
 
@@ -39,10 +40,10 @@ class Item:
         self.title = title
         self.content = content
         self.author = author
-        self.project = project
-        self.target = target
         self.completed = False
         self.removed = False
+        self.project = project
+        self.target = target
         self.private = private
 
     @property
@@ -52,10 +53,10 @@ class Item:
             'title': self.title,
             'content': self.content,
             'author': self.author,
-            'project': self.project,
-            'target': self.target,
             'completed': self.completed,
             'removed': self.removed,
+            'project': self.project,
+            'target': self.target,
             'private': self.private,
         }
 

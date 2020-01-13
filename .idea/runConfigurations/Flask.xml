@@ -1,12 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Flask (app.py)" type="Python.FlaskServer" nameIsGenerated="true">
+  <configuration default="false" name="Flask" type="Python.FlaskServer" nameIsGenerated="true">
     <module name="JustTodo-server" />
     <option name="target" value="C:\Users\doohe\PycharmProjects\JustTodo-server\app.py" />
     <option name="targetType" value="PATH" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
     <option name="SDK_HOME" value="C:\Program Files\Python38\python.exe" />
-    <option name="WORKING_DIRECTORY" value="" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <option name="IS_MODULE_SDK" value="false" />
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
