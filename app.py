@@ -24,6 +24,7 @@ def load():
 
 
 class Item:
+    MEMBERS = ["id", "title", "content", "author", "completed", "removevd", "project", "target", "private"]
     id: str
     title: str
     content: str
@@ -45,6 +46,15 @@ class Item:
         self.project = project
         self.target = target
         self.private = private
+
+    @classmethod
+    def fromid(cls, uid):
+        cur.execute("SELECT * from todo where id=?", uid)
+        return cls(**cur.fetchall()[0])
+
+    def editinfo(self, **kwargs):
+        for member in self.MEMBERS:
+            exec("self." + member + " = " + kwargs[member])
 
     @property
     def dict(self):
