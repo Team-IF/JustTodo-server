@@ -24,7 +24,7 @@ def load():
 
 
 class Item:
-    MEMBERS = ["id", "title", "content", "author", "completed", "removevd", "project", "target", "private"]
+    MEMBERS = ["title", "content", "author", "completed", "removevd", "project", "target", "private"]
     id: str
     title: str
     content: str
@@ -50,7 +50,10 @@ class Item:
     @classmethod
     def fromid(cls, uid):
         cur.execute("SELECT * from todo where id=?", uid)
-        return cls(**cur.fetchall()[0])
+        qur = cls(**cur.fetchall()[0])
+        qur.cid = uid
+        return qur
+        
 
     def editinfo(self, **kwargs):
         for member in self.MEMBERS:
@@ -59,7 +62,7 @@ class Item:
     @property
     def dict(self):
         return {
-            'id': self.id,
+            'id': self.cid,
             'title': self.title,
             'content': self.content,
             'author': self.author,
@@ -73,7 +76,7 @@ class Item:
     @property
     def tuple(self):
         return (
-            self.id,
+            self.cid,
             self.title,
             self.content,
             self.author,
@@ -99,8 +102,8 @@ def maketodo():
     return todo.dict
 
 
-@app.route('/', methods=['DELETE'])
-def deletetodo():
+@app.route('/<cid>', methods=['DELETE'])
+def deletetodo(cid):
     pass
 
 
