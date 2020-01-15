@@ -37,7 +37,7 @@ class Item:
 
     def __init__(self, title: str, content: str, author: str, project: str = None, target: str = None,
                  private: bool = False):
-        self.id = token_urlsafe(5)
+        self.cid = token_urlsafe(5)
         self.title = title
         self.content = content
         self.author = author
@@ -104,7 +104,8 @@ def maketodo():
 
 @app.route('/<cid>', methods=['DELETE'])
 def deletetodo(cid):
-    pass
+    cur.execute("DELETE FROM todo WHERE id=?", (cid,))
+    return cid, 204
 
 
 @app.route('/', methods=['PUT'])

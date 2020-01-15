@@ -16,12 +16,10 @@ GET http://127.0.0.1:5000/
 Content-Type: application/json
 
 {
-  "title": "str",
-  "content": "str",
-  "author": "str",
-  "project": "str",
-  "target": "str",
-  "private": false
 }
+
+###
+
+DELETE http://127.0.0.1:5000/LlDM3Jk
 
 ###
