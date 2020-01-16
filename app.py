@@ -48,20 +48,22 @@ class Item:
         self.private = private
 
     def editinfo(self, **kwargs):
-        self.cid = kwargs["id"]
-        self.title = kwargs["title"]
-        self.content = kwargs["content"]
-        self.author = kwargs["author"]
-        self.completed = kwargs["completed"]
-        self.removed = kwargs["removed"]
-        self.project = kwargs["project"]
-        self.target = kwargs["target"]
-        self.private = kwargs["private"]
+        if not kwargs.get("id"): self.cid = kwargs["id"]
+        if not kwargs.get("title"): self.title = kwargs["title"]
+        if not kwargs.get("content"): self.content = kwargs["content"]
+        if not kwargs.get("author"): self.author = kwargs["author"]
+        if not kwargs.get("completed"): self.completed = kwargs["completed"]
+        if not kwargs.get("removed"): self.removed = kwargs["removed"]
+        if not kwargs.get("project"): self.project = kwargs["project"]
+        if not kwargs.get("target"): self.target = kwargs["target"]
+        if not kwargs.get("private"): self.private = kwargs["private"]
 
     @classmethod
     def fromid(cls, uid):
         cur.execute("SELECT * from todo where id=?", (uid,))
-        qur = cls(**cur.fetchall()[0])
+        fa = cur.fetchall()[0]
+        del fa["id"]
+        qur = cls(**fa)
         qur.cid = uid
         return qur
 
