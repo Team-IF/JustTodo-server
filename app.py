@@ -36,27 +36,34 @@ class Item:
     private: bool
 
     def __init__(self, title: str, content: str, author: str, project: str = None, target: str = None,
-                 private: bool = False):
+                 private: bool = False, completed: bool = False, removed: bool = False):
         self.cid = token_urlsafe(5)
         self.title = title
         self.content = content
         self.author = author
-        self.completed = False
-        self.removed = False
+        self.completed = completed
+        self.removed = removed
         self.project = project
         self.target = target
         self.private = private
 
+    def editinfo(self, **kwargs):
+        self.cid = kwargs["id"]
+        self.title = kwargs["title"]
+        self.content = kwargs["content"]
+        self.author = kwargs["author"]
+        self.completed = kwargs["completed"]
+        self.removed = kwargs["removed"]
+        self.project = kwargs["project"]
+        self.target = kwargs["target"]
+        self.private = kwargs["private"]
+
     @classmethod
     def fromid(cls, uid):
-        cur.execute("SELECT * from todo where id=?", uid)
+        cur.execute("SELECT * from todo where id=?", (uid,))
         qur = cls(**cur.fetchall()[0])
         qur.cid = uid
         return qur
-
-    def editinfo(self, **kwargs):
-        for member in self.MEMBERS:
-            exec("self." + member + " = " + kwargs[member])
 
     @property
     def dict(self):
