@@ -23,3 +23,16 @@ Content-Type: application/json
 DELETE http://127.0.0.1:5000/LlDM3Jk
 
 ###
+
+PUT http://127.0.0.1:5000/
+Content-Type: application/json
+
+{
+  "id": "atH4sLU",
+  "content": "11",
+  "author": "2222",
+  "project": "3333",
+  "target": "st44r"
+}
+
+###

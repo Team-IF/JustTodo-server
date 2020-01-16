@@ -61,7 +61,9 @@ class Item:
     @classmethod
     def fromid(cls, uid):
         cur.execute("SELECT * from todo where id=?", (uid,))
-        qur = cls(**cur.fetchall()[0])
+        fa = cur.fetchall()[0]
+        del fa["id"]
+        qur = cls(**fa)
         qur.cid = uid
         return qur
 
