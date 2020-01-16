@@ -25,7 +25,7 @@ def load():
 
 class Item:
     MEMBERS = ["title", "content", "author", "completed", "removevd", "project", "target", "private"]
-    id: str
+    cid: str
     title: str
     content: str
     author: str
@@ -53,7 +53,6 @@ class Item:
         qur = cls(**cur.fetchall()[0])
         qur.cid = uid
         return qur
-        
 
     def editinfo(self, **kwargs):
         for member in self.MEMBERS:
@@ -78,12 +77,12 @@ class Item:
         return (
             self.cid,
             self.title,
-            self.content,
             self.author,
-            self.project,
-            self.target,
+            self.content,
             self.completed,
             self.removed,
+            self.project,
+            self.target,
             self.private,
         )
 
@@ -110,7 +109,12 @@ def deletetodo(cid):
 
 @app.route('/', methods=['PUT'])
 def edittodo():
-    pass
+    req = request.get_json()
+    todo = Item.fromid(req["id"])
+    todo.editinfo(**req)
+    cur.execute("UPDATE todo SET id=?,title=?,content=?,author=?,completed=?,removed=?,project=?,target=?,private=? "
+                "WHERE id=?", todo.tuple + (todo.cid,))
+    return req, 200
 
 
 if __name__ == "__main__":
