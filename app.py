@@ -48,15 +48,15 @@ class Item:
         self.private = private
 
     def editinfo(self, **kwargs):
-        if not kwargs.get("id"): self.cid = kwargs["id"]
-        if not kwargs.get("title"): self.title = kwargs["title"]
-        if not kwargs.get("content"): self.content = kwargs["content"]
-        if not kwargs.get("author"): self.author = kwargs["author"]
-        if not kwargs.get("completed"): self.completed = kwargs["completed"]
-        if not kwargs.get("removed"): self.removed = kwargs["removed"]
-        if not kwargs.get("project"): self.project = kwargs["project"]
-        if not kwargs.get("target"): self.target = kwargs["target"]
-        if not kwargs.get("private"): self.private = kwargs["private"]
+        if kwargs.get("id"): self.cid = kwargs["id"]
+        if kwargs.get("title"): self.title = kwargs["title"]
+        if kwargs.get("content"): self.content = kwargs["content"]
+        if kwargs.get("author"): self.author = kwargs["author"]
+        if kwargs.get("completed"): self.completed = kwargs["completed"]
+        if kwargs.get("removed"): self.removed = kwargs["removed"]
+        if kwargs.get("project"): self.project = kwargs["project"]
+        if kwargs.get("target"): self.target = kwargs["target"]
+        if kwargs.get("private"): self.private = kwargs["private"]
 
     @classmethod
     def fromid(cls, uid):
